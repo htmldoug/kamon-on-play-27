@@ -1,0 +1,2 @@
+
+GET           /test                      controllers.DummyController.test
