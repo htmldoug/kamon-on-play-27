@@ -9,6 +9,6 @@ When the app is up you can check kamon status by opening on your browser `http:/
 
 
 ### TODO
-* HTTP propagation in DEV mode (it seems to require a change on `kamon-akka-http`).
+* Propagation of HTTP headers in DEV mode (it seems to require a change on `kamon-instrumentation-common`).
 * Return HTTP tags on response headers.
 * Generate new tag value if it's not provided by the request.
