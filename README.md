@@ -29,3 +29,4 @@ curl --request GET \
 ### TODO
 * Propagation of HTTP headers in DEV mode (it seems to require a change on `kamon-instrumentation-common`).
 * Return HTTP tags on response headers.
+* Logback prints old tags (to reproduce the issue, just send 2 requests with different x-custom-trace-id and you'll see the first one header print in the logs of both requests)
