@@ -4,11 +4,28 @@ Example web app with `Play 2.7` and `Kamon 2.x`.
 ### Start on PROD mode
 Run the app using the class `play.core.server.ProdServerStart` as entry point and pass kanela agent by providing the JVM option: `-javaagent:path/to/kanela-agent-{version}.jar` 
 
-### Kamon status
-When the app is up you can check kamon status by opening on your browser `http://localhost:5266/`.
+**JVM params example for easier setting up:**
+```bash
+-Dpidfile.path=/dev/null -javaagent:~/.ivy2/cache/io.kamon/kanela-agent/jars/kanela-agent-1.0.0-RC2.jar
+```
 
+### Kamon status view
+When the app is running you can easily check the kamon instrumentation status by opening on your browser `http://localhost:5266/`.
+
+### Feature of Kamon introduced
+* Propagate HTTP headers.
+* Generate new tag value if it's not provided by the request headers (implemented by class `support.kamon.HeadersPropagation`).
+* Expose tags on `logback`.
+
+### Requests examples
+
+```bash
+curl --request GET \
+  --url http://localhost:9000/dummy/outgoing-request \
+  --header 'x-custom-trace-id: cspinetta-trace-id-1' \
+  --header 'x-forwarded-for: cspinetta-laptop-2'
+```
 
 ### TODO
 * Propagation of HTTP headers in DEV mode (it seems to require a change on `kamon-instrumentation-common`).
 * Return HTTP tags on response headers.
-* Generate new tag value if it's not provided by the request.
