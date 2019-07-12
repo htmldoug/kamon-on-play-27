@@ -10,7 +10,7 @@ Run the app using the class `play.core.server.ProdServerStart` as entry point an
 ```
 
 ### Kamon status view
-When the app is running you can easily check the kamon instrumentation status by opening on your browser `http://localhost:5266/`.
+While the app is running you can easily check the kamon instrumentation status by opening on your browser `http://localhost:5266/`.
 
 ### Feature of Kamon introduced
 * Propagate HTTP headers.
@@ -27,6 +27,8 @@ curl --request GET \
 ```
 
 ### TODO
-* Propagation of HTTP headers in DEV mode (it seems to require a change on `kamon-instrumentation-common`).
+* Propagate HTTP headers in DEV mode.
+  * If the config requires load a class, it fails because the class loader used by Kanela can't see it
+  * For any another change, the new config is not visible for `kamon-instrumentation-common`.
 * Return HTTP tags on response headers.
 * Logback prints old tags (to reproduce the issue, just send 2 requests with different x-custom-trace-id and you'll see the first one header print in the logs of both requests)
