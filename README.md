@@ -31,4 +31,3 @@ curl --request GET \
   * If the config requires load a class, it fails because the class loader used by Kanela can't see it
   * For any another change, the new config is not visible for `kamon-instrumentation-common`.
 * Return HTTP tags on response headers.
-* Logback prints old tags (to reproduce the issue, just send 2 requests with different x-custom-trace-id and you'll see the first one header print in the logs of both requests)
