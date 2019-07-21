@@ -3,8 +3,8 @@ package controllers
 import clients.SomeClient
 import javax.inject.{Inject, Singleton}
 import kamon.Kamon
-import kamon.tag.Tag
-import play.api.mvc.{Action, AnyContent, BaseController, ControllerComponents}
+import kamon.tag.{Lookups, Tag}
+import play.api.mvc._
 import support.LogSupport
 
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -16,6 +16,11 @@ class DummyController @Inject()(val controllerComponents: ControllerComponents,
   def get: Action[AnyContent] = Action {
     Ok(bodyResponse(controllers.routes.DummyController.get().url))
       .withHeaders(headers = "Custom-Header" -> "xxx")
+  }
+
+  def post = Action(parse.raw) { request =>
+    val filter = Kamon.currentContext().getTag(Lookups.plain("filter"))
+    Ok(s"Context tag is: $filter")
   }
 
   def outgoingRequest: Action[AnyContent] = Action.async {
